@@ -21,7 +21,8 @@ def main():
                 'id': recipe[0],
                 'title': recipe[1],
                 'callories': recipe[2],
-                'cooking_time': recipe[3]
+                'cooking_time': recipe[3],
+                'image_path': recipe[4]
             }
         )
 
