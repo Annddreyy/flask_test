@@ -5,28 +5,30 @@ from flask import Flask, jsonify
 app = Flask(__name__)
 
 
-@app.route("/api/v1/users", methods=['GET'])
+@app.route("/api/v1/recipes", methods=['GET'])
 def main():
-    conn = sqlite3.connect('test.db')
+    conn = sqlite3.connect('cooking_app.db')
     cur = conn.cursor()
 
-    cur.execute('SELECT * FROM test')
+    cur.execute('SELECT * FROM recipe')
 
-    data = cur.fetchall()
+    recipes = cur.fetchall()
 
-    data_json = []
-    for d in data:
-        data_json.append(
+    recipes_json = []
+    for recipe in recipes:
+        recipes_json.append(
             {
-                'id': d[0],
-                'surname': d[1]
+                'id': recipe[0],
+                'title': recipe[1],
+                'callories': recipe[2],
+                'cooking_time': recipe[3]
             }
         )
 
     cur.close()
     conn.close()
 
-    return jsonify(data_json)
+    return jsonify(recipes_json)
 
 
 if __name__ == '__main__':
